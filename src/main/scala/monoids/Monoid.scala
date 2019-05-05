@@ -75,4 +75,28 @@ object Monoid {
     }
   }
 
+  // an example of composing monoids
+  def mapMergeMonoid[K, V](v: Monoid[V]): Monoid[Map[K, V]] =
+    new Monoid[Map[K, V]] {
+      val unit = Map[K, V]()
+
+      def op(a: Map[K, V], b: Map[K, V]) =
+        (a.keySet ++ b.keySet).foldLeft(unit) { (acc, k) =>
+          acc.updated(k, v.op(a.getOrElse(k, v.unit), b.getOrElse(k, v.unit)))
+        }
+    }
+
+  val M: Monoid[Map[String, Map[String, Int]]] = mapMergeMonoid(mapMergeMonoid(intAddition))
+
+  def functionMonoid[A, B](B: Monoid[B]): Monoid[A => B] = new Monoid[A => B] {
+    override def op(x: A => B, y: A => B): A => B = (a: A) => B.op(x(a), y(a))
+
+    override val unit: A => B = (_: A) => B.unit
+  }
+
+  def bag[A](as: IndexedSeq[A]): Map[A, Int] = {
+    val m: Monoid[Map[A, Int]] = mapMergeMonoid(intAddition)
+    foldMapV(as, m)(a => Map(a -> 1))
+  }
+
 }

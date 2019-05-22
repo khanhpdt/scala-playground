@@ -1,5 +1,7 @@
 package monads
 
+import functors.Functor
+
 trait Monad[F[_]] extends Functor[F] {
 
   def unit[A](a: => A): F[A]

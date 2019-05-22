@@ -19,3 +19,6 @@ Functor law:
 
 ## Monad
 
+
+
+All monads are functors, but not all functors are monads.

@@ -6,8 +6,8 @@
 
 ## Monoid
 
+A Monoid is basically a type, together with an operation and three laws.
 ```scala
-// A Monoid is basically a type, together with an operation and three laws.
 trait Monoid[A] {
   // This op must satisfy two laws:
   // - Closure: produces the output of the same type as the inputs

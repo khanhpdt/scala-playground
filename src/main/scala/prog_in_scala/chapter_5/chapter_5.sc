@@ -43,10 +43,21 @@ Symbols are interned as Strings in Java.
 i.e., literals with the same name reference
 to the same Symbol object.
  */
-val sl1 = 'hello
-val sl2 = 'hello
+val sl1 = Symbol("hello")
+val sl2 = Symbol("hello")
 println(sl1 == sl2)
 
 // what we can do with Symbols is to get their names
 sl1.name
 
+/*
+Object equality (==): First check the left side for null. If it is not null, call the equals method.
+ */
+println(List(1, 2, 3) == List(1, 2, 3)) // true
+println(List(1, 2, 3) == List(1, 2)) // false
+println(null == List(1, 2)) // false
+println(List(1) == null) // false
+// even if comparing different types, the result
+// can still be true depending on the implementation
+// of "equals" method.
+println(1 == 1.0) // true

@@ -31,7 +31,8 @@ val z: Unit = y3 += 2
 //assert(z == ()) // IDE warning
 
 /*
-It is recommended to challenge using loops (i.e., while and do-while) because these are not pure functional. Just as it is recommended to use vals  instead of vars.
+It is recommended to challenge using loops (i.e., while and do-while) because these are not pure functional.
+Just as it is recommended to use vals instead of vars.
  */
 
 /*
@@ -113,6 +114,7 @@ tryCatch(1)
 tryCatch(2)
 
 /*
-It is recommended not to return value in the finally block, b/c this it is confusing. The finally block should only be used to handle side effects, e.g., closing a file.
+It is recommended not to return value in the finally block, b/c this it is confusing.
+The finally block should only be used to handle side effects, e.g., closing a file.
  */
 

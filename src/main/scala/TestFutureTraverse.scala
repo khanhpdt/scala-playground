@@ -15,10 +15,8 @@ object TestFutureTraverse extends App {
       in.foldLeft(Future.successful(cbf(in))) { case (res, item) =>
         for {
           r1 <- res
-          r2 <- fn(item).map(Some(_)).recover { case _ => Option.empty[B] } // ignore failure for now
-        } yield (
-          r2.fold(r1)(r2v => r1 += r2v)
-          )
+          r2 <- fn(item).map(Some(_)).recover { case _ => Option.empty[B] }
+        } yield r2.fold(r1)(r2v => r1 += r2v)
       }.map(_.result())
     }
   }

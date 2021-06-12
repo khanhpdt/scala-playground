@@ -45,13 +45,14 @@ to the same Symbol object.
  */
 val sl1 = Symbol("hello")
 val sl2 = Symbol("hello")
-println(sl1 == sl2)
+println(sl1 == sl2) // true
 
 // what we can do with Symbols is to get their names
 sl1.name
 
 /*
-Object equality (==): First check the left side for null. If it is not null, call the equals method.
+Object equality (==): First check the left side for null.
+If it is not null, call the equals method.
  */
 println(List(1, 2, 3) == List(1, 2, 3)) // true
 println(List(1, 2, 3) == List(1, 2)) // false

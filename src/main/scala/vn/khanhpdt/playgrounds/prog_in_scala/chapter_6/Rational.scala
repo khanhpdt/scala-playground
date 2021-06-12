@@ -1,7 +1,8 @@
 package vn.khanhpdt.playgrounds.prog_in_scala.chapter_6
 
 // Without using "val" or "var", the parameters are not fields but only parameters of the primary constructor.
-// However, these parameters can still be accessed inside the class body.
+// So the scope of those parameters are only in the constructors, thus they cannot be referenced to by any outside code.
+// However, they can still be accessed inside the class body.
 class Rational(n: Int, d: Int) {
 
   // The Scala compiler will compile any code you place in the class body, which isn't part of a field

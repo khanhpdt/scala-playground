@@ -54,9 +54,9 @@ for (i <- 0 to 1) {
 }
 
 /*
-In Scala, if you apply parentheses surrounding values or variables,
+If you apply parentheses surrounding values or variables,
 what actually happens is that Scala will call a designated method on
-on the receiver with the values or variables as arguments.
+the receiver with the values or variables as arguments.
 
 e.g.,
 val x = arr(0) is transformed to val x = arr.apply(0).
@@ -64,7 +64,7 @@ arr(0) = 1 is transformed to arr.update(0, 1).
  */
 
 /*
-In Scala, everything is objects, even for numbers.
+Everything is object, even for numbers.
 e.g., the literal 1 is an object of type Int, and when we execute
 1 + 2, what happens is that we call the method named "+" on the
 Int object 1.
@@ -98,8 +98,8 @@ val e1 = -1
 // :: pronounces as "cons"
 // What actually happens here is that the operator "::" will
 // be transformed to the method "::" on the object l3.
-// In Scala, if a method name ends with the colon ":", it
-// is invoked on the right operand.
+// If a method name ends with the colon ":", it is right associative,
+// i.e., it is invoked on the right operand.
 val l4 = e1 :: l3
 println(l4)
 

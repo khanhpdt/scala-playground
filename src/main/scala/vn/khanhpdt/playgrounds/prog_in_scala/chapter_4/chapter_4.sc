@@ -1,7 +1,7 @@
 /*
 Use "class" keyword to define a class.
 
-In Scala, if no modifier is defined, the scope is public.
+If no modifier is defined, the scope is public.
 So, in this case, the class is public.
 
 Fields and methods are collectively called members of a class.

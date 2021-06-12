@@ -31,12 +31,12 @@ val z: Unit = y3 += 2
 //assert(z == ()) // IDE warning
 
 /*
-It is recommended to challenge using loops (i.e., while and do-while) because these are not pure functional.
+It is recommended to avoid using loops (i.e., while and do-while) because these are not pure functional.
 Just as it is recommended to use vals instead of vars.
  */
 
 /*
-for expression, meaning it returns value
+for expression is an expression because it can return value
  */
 val l1 = List(1, 2, 3)
 // note that, the for expression here returns unit value
@@ -81,7 +81,7 @@ val l3 = for {
   if i % 2 == 0
 } yield i.toString
 
-// l3 will have the same type as the generator, e.g., if the right-hand side of <- is a list, then it will be a list.
+// l3 will have the same type as the first generator, e.g., if the right-hand side of <- is a list, then it will be a list.
 l3.foreach(println)
 
 /*
@@ -105,7 +105,7 @@ def tryCatch(x: Int): String = {
     println("finally")
     // without using "return", the value of the try-catch expression is determined by the returned value in the try or catch block
     if (x == 0) "Hey 0"
-    // // using "return", the value of the try-catch expression is determined by the returned value here
+    // using "return", the value of the try-catch expression is determined by the returned value here
     else return "Finally returns"
   }
 }

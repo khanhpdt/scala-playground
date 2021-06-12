@@ -3,7 +3,7 @@ package vn.khanhpdt.playgrounds.future
 import scala.collection.BuildFrom
 import scala.concurrent.{ExecutionContext, Future}
 import scala.language.higherKinds
-import scala.util.{Random, Success}
+import scala.util.{Failure, Random, Success}
 
 object TestFutureTraverse extends App {
   implicit val ec: ExecutionContext = scala.concurrent.ExecutionContext.Implicits.global
@@ -24,32 +24,60 @@ object TestFutureTraverse extends App {
     }
   }
 
+  println()
+  println("Note that items 1,5,7 are not printed out because in our test we throw error when processing them.")
+  println()
+
+  println("Testing Future.traverse. The items are processed in parallel.")
   traverseF((1 to 20).toList, isParallel = true) { i =>
     Future {
       Thread.sleep(Random.nextInt(300))
       if (Set(1, 5, 7).contains(i)) {
-        sys.error("Failed")
+        sys.error(s"Failed: $i")
       }
       print(i + " ")
     }
+  }.onComplete {
+    case Success(is) =>
+      println()
+      println(s"The output of traverse: ${is.mkString(",")}")
+    case Failure(ex) =>
+      println()
+      println(s"The resulting future is failed with error: ${ex.getMessage}")
   }
 
+  // wait for the future to finish
   Thread.sleep(3000)
-  println()
 
+  println()
+  println("Only one error logged, which means Future.traverse will keep only the first error and skip the other errors.")
+  println("This is probably because Future.traverse uses Future.zipWith to combine the futures.")
+  println("Although error might happen for some item in the middle of processing, Future.traverse still processes the other items.")
+
+  println("\n")
+
+  println("Testing sequential traverse. The items are processed sequentially.")
+
+  print("Items are processed in order: ")
   traverseF((1 to 20).toList, isParallel = false) { i =>
     Future {
       Thread.sleep(Random.nextInt(300))
       if (Set(1, 5, 7).contains(i)) {
-        sys.error("Failed")
+        sys.error(s"Failed: $i")
       }
       print(i + " ")
       i
     }
   }.onComplete {
-    case Success(is) => println(is.mkString(","))
-    case _ =>
+    case Success(is) =>
+      println()
+      println(s"The output of traverse: ${is.mkString(",")}")
+    case Failure(ex) =>
+      println()
+      println(s"The resulting future is failed with error: ${ex.getMessage}")
   }
 
-  Thread.sleep(3000)
+  // wait for the future to finish
+  Thread.sleep(5000)
+
 }

@@ -28,7 +28,7 @@ Monad laws:
 def compose[A, B, C](f: A => F[B], g: B => F[C]): A => F[C] = a => flatMap(f(a))(g)
 ```
 
-One typical and very common usage of vn.khanhpdt.playgrounds.monads in Scala is in for comprehension.
+One typical and very common usage of monads in Scala is in for comprehension.
 
 ## Terms
 

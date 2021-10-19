@@ -77,3 +77,22 @@ val l3 = for {
 
 // l3 will have the same type as the first generator, e.g., if the right-hand side of <- is a list, then it will be a list.
 l3.foreach(println)
+
+// pattern matching from empty list
+case class Class1(f1: String)
+// this works
+for {
+  Class1(f1) <- List.empty[Class1]
+} {
+  println(f1)
+}
+//// but this does not
+//for {
+//  Class1(f1) <- Nil
+//} {
+//  println(f1)
+//}
+// nor does this
+Nil.foreach { case Class1(f1) =>
+  println(f1)
+}

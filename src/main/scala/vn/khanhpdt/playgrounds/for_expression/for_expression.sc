@@ -93,6 +93,14 @@ for {
 //  println(f1)
 //}
 // nor does this
-Nil.foreach { case Class1(f1) =>
-  println(f1)
+//Nil.foreach { case Class1(f1) =>
+//  println(f1)
+//}
+
+case class Class2(f1: Option[String])
+// this works
+for {
+  (Some(f1), cs) <- List(Class2(None)).groupBy(_.f1)
+} {
+  println("should not print this")
 }

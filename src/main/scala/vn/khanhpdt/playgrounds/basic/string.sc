@@ -6,3 +6,6 @@ s.getBytes.length
 s.getBytes(Charset.forName("UTF8")).length
 s.getBytes(Charset.forName("UTF16")).length
 s.getBytes(Charset.forName("UTF32")).length
+
+// split empty string does not provide empty array
+"".split(",")
